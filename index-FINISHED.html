@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo projet</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <header>
+      <h1>Aleksa's Todo list</h1>
+    </header>
+    <form>
+      <input
+        type="text"
+        class="input-item"
+        placeholder="What will you be doing?"
+      />
+      <button class="submit-btn" type="submit">
+        <i class="fa-regular fa-square-plus"></i>
+      </button>
+    </form>
+    <div class="todo-container">
+      <ul class="todo-list"></ul>
+    </div>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background: gray;
+        color: #fff;
+        min-height: 100vh;
+      }
+      header {
+        font-size: 1.5rem;
+      }
+      header,
+      form {
+        min-height: 20vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      form input,
+      form button {
+        font-size: 2rem;
+        padding: 0.5rem;
+        border: none;
+        background: #fff;
+      }
+      form button {
+        cursor: pointer;
+      }
+      form button:hover {
+        color: #04aa6d;
+        transition: all 0.3s ease;
+      }
+      .todo-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .todo-list {
+        min-width: 30%;
+        list-style: none;
+      }
+      .todo {
+        padding: 0.5rem;
+        margin: 0.5rem;
+        background: #fff;
+        color: #000;
+        font-size: 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .trash-btn {
+        cursor: pointer;
+        border: none;
+        background: #fff;
+        font-size: 2rem;
+      }
+      .trash-btn:hover {
+        color: crimson;
+        transition: all 0.3s ease;
+      }
+    </style>
+    <script>
+      const input = document.querySelector(".input-item");
+      const list = document.querySelector(".todo-list");
+      const submitBtn = document.querySelector(".submit-btn");
+      submitBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        const todoDiv = document.createElement("div");
+        todoDiv.classList.add("todo");
+        const newTodo = document.createElement("li");
+        newTodo.innerText = input.value;
+        newTodo.classList.add("todo-item");
+        todoDiv.appendChild(newTodo);
+        const trashBtn = document.createElement("button");
+        trashBtn.innerHTML = '<i class="fa-regular fa-trash-can"></i>';
+        trashBtn.classList.add("trash-btn");
+        todoDiv.appendChild(trashBtn);
+        list.appendChild(todoDiv);
+        input.value = "";
+        todoDiv.addEventListener("click", () => {
+          todoDiv.remove();
+        });
+      });
+    </script>
+  </body>
+</html>
